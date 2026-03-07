@@ -7,26 +7,12 @@ namespace FreeCam.Components;
 
 public class FreeCamController : MonoBehaviour
 {
-    public const Key ToggleKey = Key.Semicolon;
-    public const Key ToggleKeyAlt = Key.NumpadPeriod;
-
     public const Key GUIKey = Key.Quote;
 
     public const Key CenterOnPlayerKey = Key.Digit0;
     public const Key CenterOnPlayerKeyAlt = Key.Numpad0;
 
-    public static readonly Dictionary<AstroObject.Name, (Key key, Key alt)> CenterOnPlanetKey = new()
-    {
-        { AstroObject.Name.Sun, (Key.Digit1, Key.Numpad1) },
-        { AstroObject.Name.Comet, (Key.Digit2, Key.Numpad2) },
-        { AstroObject.Name.CaveTwin, (Key.Digit3, Key.Numpad3) },
-        { AstroObject.Name.TowerTwin, (Key.Digit4, Key.Numpad4) },
-        { AstroObject.Name.TimberHearth, (Key.Digit5, Key.Numpad5) },
-        { AstroObject.Name.BrittleHollow, (Key.Digit6, Key.Numpad6) },
-        { AstroObject.Name.GiantsDeep, (Key.Digit7, Key.Numpad7) },
-        { AstroObject.Name.DarkBramble, (Key.Digit8, Key.Numpad8) },
-        { AstroObject.Name.RingWorld, (Key.Digit9, Key.Numpad9) }
-    };
+    // Planet center bindings are managed via MainClass rebindable inputs
 
     public const Key TeleportKey = Key.T;
     public const Key ReparentKey = Key.Y;
@@ -71,52 +57,53 @@ public class FreeCamController : MonoBehaviour
     {
         if (OWTime.IsPaused()) return;
 
-        if (Keyboard.current[ToggleKey].wasPressedThisFrame || Keyboard.current[ToggleKeyAlt].wasPressedThisFrame)
+        if (OWInput.IsNewlyPressed(MainClass.ToggleFreeCamBind))
         {
             MainClass.ToggleFreeCam();
         }
 
         if (!MainClass.InFreeCam) return;
 
-        if (Keyboard.current[Key.NumpadDivide].wasPressedThisFrame || Keyboard.current[Key.Comma].wasPressedThisFrame)
+        if (OWInput.IsNewlyPressed(MainClass.Time0Bind))
         {
             Time.timeScale = 0f;
             Locator.GetMenuAudioController().PlayButtonFocus();
         }
 
-        if (Keyboard.current[Key.NumpadMultiply].wasPressedThisFrame || Keyboard.current[Key.Period].wasPressedThisFrame)
+        if (OWInput.IsNewlyPressed(MainClass.Time50Bind))
         {
             Time.timeScale = 0.5f;
             Locator.GetMenuAudioController().PlayButtonFocus();
         }
 
-        if (Keyboard.current[Key.NumpadMinus].wasPressedThisFrame || Keyboard.current[Key.Slash].wasPressedThisFrame)
+        if (OWInput.IsNewlyPressed(MainClass.Time100Bind))
         {
             Time.timeScale = 1f;
             Locator.GetMenuAudioController().PlayButtonFocus();
         }
 
         HoldingTeleport = false;
-        if (Keyboard.current[TeleportKey].isPressed || Keyboard.current[ReparentKey].isPressed)
+        if (OWInput.IsPressed(MainClass.TeleportBind) || OWInput.IsPressed(MainClass.ReparentBind))
         {
             HoldingTeleport = true;
 
-            if (Keyboard.current[CenterOnPlayerKey].wasPressedThisFrame || Keyboard.current[CenterOnPlayerKeyAlt].wasPressedThisFrame)
+            if (OWInput.IsNewlyPressed(MainClass.CenterOnPlayerBind))
             {
-                ParentToPlayer(Keyboard.current[TeleportKey].isPressed);
+                ParentToPlayer(OWInput.IsPressed(MainClass.TeleportBind));
             }
 
-            foreach (var planet in CenterOnPlanetKey.Keys)
+            foreach (var planet in Enum.GetValues(typeof(AstroObject.Name)))
             {
-                var (key, alt) = CenterOnPlanetKey[planet];
-                if (Keyboard.current[key].wasPressedThisFrame || Keyboard.current[alt].wasPressedThisFrame)
+                var p = (AstroObject.Name)planet;
+                var cmd = MainClass.GetCenterOnPlanetBind(p);
+                if (cmd != null && OWInput.IsNewlyPressed(cmd))
                 {
-                    ParentToAstroObject(Locator.GetAstroObject(planet), Keyboard.current[TeleportKey].isPressed);
+                    ParentToAstroObject(Locator.GetAstroObject(p), OWInput.IsPressed(MainClass.TeleportBind));
                 }
             }
         }
 
-        if (Keyboard.current[GUIKey].wasPressedThisFrame)
+        if (OWInput.IsNewlyPressed(MainClass.ToggleHUDBind))
         {
             MainClass.ToggleHUD();
         }

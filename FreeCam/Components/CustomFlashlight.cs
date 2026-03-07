@@ -52,21 +52,16 @@ public class CustomFlashlight : MonoBehaviour
         }
 
         // Adjust range of the light
-        if (Keyboard.current[Key.LeftBracket].IsPressed())
-        {
-            var rate = Keyboard.current[Key.LeftShift].IsPressed() ? _fastRangeAdjust : _slowRangeAdjust;
+        var rate = OWInput.IsPressed(MainClass.FlashlightSpeedBind) ? _fastRangeAdjust : _slowRangeAdjust;
 
-            _range = Mathf.Clamp(_range - rate * Time.deltaTime, _minRange, _maxRange);
-            _light.range = _range;
+        var rangeValue = OWInput.GetValue(MainClass.FlashlightRangeBind);
+        if (rangeValue != 0)
+        {
+            MainClass.Write($"Range bind: {rangeValue}");
         }
 
-        if (Keyboard.current[Key.RightBracket].IsPressed())
-        {
-            var rate = Keyboard.current[Key.LeftShift].IsPressed() ? _fastRangeAdjust : _slowRangeAdjust;
-
-            _range = Mathf.Clamp(_range + rate * Time.deltaTime, _minRange, _maxRange);
-            _light.range = _range;
-        }
+        _range = Mathf.Clamp(_range + (rangeValue * rate) * Time.deltaTime, _minRange, _maxRange);
+        _light.range = _range;
     }
 
     public bool FlashlightOn() => _light.enabled;

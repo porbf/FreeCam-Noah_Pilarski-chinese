@@ -5,6 +5,10 @@
     "CameraSeparator": {
       "type": "separator"
     },
+    "CameraLabel": {
+      "type": "label",
+      "title": "Camera"
+    },
     "FOV": {
       "title": "FOV",
       "type": "slider",
@@ -28,6 +32,10 @@
     "PromptsSeparator": {
       "type": "separator"
     },
+    "PromptsLabel": {
+      "type": "label",
+      "title": "Button Prompts"
+    },
     "Hide Prompts": {
       "title": "Hide Button Prompts",
       "type": "toggle",
@@ -39,6 +47,13 @@
       "type": "toggle",
       "value": false,
       "tooltip": "Hide the toggle button prompt."
+    },
+    "ControlsSeparator": {
+      "type": "separator"
+    },
+    "ControlsLabel": {
+      "type": "label",
+      "title": "Controls"
     }
   }
 }

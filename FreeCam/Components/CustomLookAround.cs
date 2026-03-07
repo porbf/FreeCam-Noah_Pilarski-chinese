@@ -34,12 +34,15 @@ public class CustomLookAround : MonoBehaviour
     {
         if (OWTime.IsPaused() || !MainClass.InFreeCam) return;
 
-        var scrollInOut =
-            Math.Max(-1f, Math.Min(1f, Mouse.current.scroll.y.ReadValue())) +
-            InputLibrary.toolOptionUp.GetValue() - InputLibrary.toolOptionDown.GetValue();
+        var scrollValue = OWInput.GetValue(MainClass.ChangeSpeedBind);
+        if (scrollValue != 0)
+        {
+            MainClass.Write($"Scroll bind: {scrollValue}");
+        }
+        var scrollInOut = Math.Max(-1f, Math.Min(1f, scrollValue));
         _moveSpeed = (float)Math.Pow(Math.E, Math.Log(_moveSpeed) + scrollInOut * 0.1f);
 
-        if (Keyboard.current[Key.DownArrow].wasPressedThisFrame)
+        if (OWInput.IsNewlyPressed(MainClass.CameraResetBind))
         {
             ResetMoveSpeed();
         }
@@ -47,7 +50,7 @@ public class CustomLookAround : MonoBehaviour
         var lookRate = OWInput.UsingGamepad() ? PlayerCameraController.GAMEPAD_LOOK_RATE_Y : PlayerCameraController.LOOK_RATE;
 
         // Possibly this should use the ship input version? Since the freecam controls are more like flight
-        var look = OWInput.GetAxisValue(InputLibrary.look, InputMode.All);
+        var look = OWInput.GetAxisValue(InputLibrary.look);
         _degreesY = look.y * lookRate * Time.unscaledDeltaTime;
         _degreesX = look.x * lookRate * Time.unscaledDeltaTime;
 
@@ -70,16 +73,6 @@ public class CustomLookAround : MonoBehaviour
         transform.position += _moveZ * transform.forward;
         transform.position += _moveX * transform.right;
         transform.position += _moveY * transform.up;
-
-        if (Keyboard.current[Key.Q].isPressed)
-        {
-            transform.Rotate(Vector3.forward, (float)Math.Log(_moveSpeed * 0.1f + 1));
-        }
-
-        if (Keyboard.current[Key.E].isPressed)
-        {
-            transform.Rotate(Vector3.forward, -(float)Math.Log(_moveSpeed * 0.1f + 1));
-        }
     }
 
     public void ResetMoveSpeed()

@@ -1,12 +1,16 @@
 ﻿using FreeCam.Components;
 using HarmonyLib;
 using OWML.Common;
+using OWML.Common.Enums;
 using OWML.ModHelper;
 using System;
 using System.Reflection;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Controls;
 using UnityEngine.SceneManagement;
+using static InputConsts;
 
 namespace FreeCam;
 
@@ -24,6 +28,39 @@ class MainClass : ModBehaviour
 	public static bool ShowPrompts { get; private set; }
 	public static bool ShowTogglePrompt { get; private set; }
 	public static bool ResetParent { get; private set; }
+
+	public static InputCommandType ToggleFreeCamBindType { get; private set; }
+	public static InputCommandType ChangeSpeedBindType { get; private set; }
+	public static InputCommandType CameraResetBindType { get; private set; }
+	public static InputCommandType FlashlightRangeBindType { get; private set; }
+	public static InputCommandType ToggleHUDBindType { get; private set; }
+	public static InputCommandType TeleportBindType { get; private set; }
+	public static InputCommandType ReparentBindType { get; private set; }
+	public static InputCommandType CenterOnPlayerBindType { get; private set; }
+	public static InputCommandType FlashlightSpeedBindType { get; private set; }
+	public static InputCommandType Time0BindType { get; private set; }
+	public static InputCommandType Time50BindType { get; private set; }
+	public static InputCommandType Time100BindType { get; private set; }
+
+	public static IInputCommands ToggleFreeCamBind => InputLibrary.GetInputCommand(ToggleFreeCamBindType);
+	public static IInputCommands ToggleHUDBind => InputLibrary.GetInputCommand(ToggleHUDBindType);
+	public static IInputCommands ChangeSpeedBind => InputLibrary.GetInputCommand(ChangeSpeedBindType);
+	public static IInputCommands CameraResetBind => InputLibrary.GetInputCommand(CameraResetBindType);
+	public static IInputCommands FlashlightRangeBind => InputLibrary.GetInputCommand(FlashlightRangeBindType);
+	public static IInputCommands TeleportBind => InputLibrary.GetInputCommand(TeleportBindType);
+	public static IInputCommands ReparentBind => InputLibrary.GetInputCommand(ReparentBindType);
+	public static IInputCommands CenterOnPlayerBind => InputLibrary.GetInputCommand(CenterOnPlayerBindType);
+	public static IInputCommands FlashlightSpeedBind => InputLibrary.GetInputCommand(FlashlightSpeedBindType);
+	public static IInputCommands Time0Bind => InputLibrary.GetInputCommand(Time0BindType);
+	public static IInputCommands Time50Bind => InputLibrary.GetInputCommand(Time50BindType);
+	public static IInputCommands Time100Bind => InputLibrary.GetInputCommand(Time100BindType);
+
+	public static readonly System.Collections.Generic.Dictionary<AstroObject.Name, InputCommandType> CenterOnPlanetBindTypes = new();
+
+	public static IInputCommands GetCenterOnPlanetBind(AstroObject.Name name)
+	{
+		return InputLibrary.GetInputCommand(CenterOnPlanetBindTypes[name]);
+	}
 
 	private InputMode _storedMode;
 	private int _fov;
@@ -55,6 +92,117 @@ class MainClass : ModBehaviour
 			}
 		}
 
+		// Toggles
+		ToggleFreeCamBindType = ModHelper.RebindingHelper.RegisterRebindable(
+			"Toggle Free Cam",
+			"Key to toggle free cam on/off.",
+			Key.Semicolon,
+			GamepadBinding.None,
+			false
+		);
+		ToggleHUDBindType = ModHelper.RebindingHelper.RegisterRebindable(
+			"Toggle HUD",
+			"Toggle the helmet HUD while in free cam.",
+			Key.Quote,
+			GamepadBinding.None,
+			false
+		);
+
+		// Camera
+		ChangeSpeedBindType = ModHelper.RebindingHelper.RegisterRebindable(
+			"Move Speed Adjust",
+			"Axis to adjust move speed.",
+			MouseBinding.ScrollUp,
+			GamepadBinding.DPadUp,
+			MouseBinding.ScrollDown,
+			GamepadBinding.DPadDown,
+			true
+		);
+		CameraResetBindType = ModHelper.RebindingHelper.RegisterRebindable(
+			"Camera Reset",
+			"Reset camera to default position.",
+			Key.DownArrow,
+			GamepadBinding.None,
+			false
+		);
+
+		// Flashlight
+		FlashlightRangeBindType = ModHelper.RebindingHelper.RegisterRebindable(
+			"Flashlight Range",
+			"",
+			Key.LeftBracket,
+			GamepadBinding.DPadLeft,
+			Key.RightBracket,
+			GamepadBinding.DPadRight,
+			true
+		);
+		FlashlightSpeedBindType = ModHelper.RebindingHelper.RegisterRebindable(
+			"Flashlight Fast Adjust",
+			"Hold to adjust flashlight range faster.",
+			Key.LeftShift,
+			GamepadBinding.None,
+			false
+		);
+
+		// Time shortcuts
+		Time0BindType = ModHelper.RebindingHelper.RegisterRebindable(
+			"Time 0%",
+			"Set game time scale to 0%.",
+			Key.Comma,
+			GamepadBinding.None,
+			false
+		);
+		Time50BindType = ModHelper.RebindingHelper.RegisterRebindable(
+			"Time 50%",
+			"Set game time scale to 50%.",
+			Key.Period,
+			GamepadBinding.None,
+			false
+		);
+		Time100BindType = ModHelper.RebindingHelper.RegisterRebindable(
+			"Time 100%",
+			"Set game time scale to 100%.",
+			Key.Slash,
+			GamepadBinding.None,
+			false
+		);
+
+		// Teleport / Reparent hold keys
+		TeleportBindType = ModHelper.RebindingHelper.RegisterRebindable(
+			"Teleport Hold",
+			"Hold to teleport or parent when selecting targets.",
+			Key.T,
+			GamepadBinding.None,
+			false
+		);
+		ReparentBindType = ModHelper.RebindingHelper.RegisterRebindable(
+			"Reparent Hold",
+			"Hold to reparent when selecting targets.",
+			Key.Y,
+			GamepadBinding.None,
+			false
+		);
+
+		CenterOnPlayerBindType = ModHelper.RebindingHelper.RegisterRebindable(
+			"Center On Player",
+			"Center free cam on the player.",
+			Key.Digit0,
+			GamepadBinding.None,
+			false
+		);
+
+		// Center on planets
+		CenterOnPlanetBindTypes[AstroObject.Name.Sun] = ModHelper.RebindingHelper.RegisterRebindable("Center On Sun", "Center free cam on the Sun.", Key.Digit1, GamepadBinding.None, false);
+		CenterOnPlanetBindTypes[AstroObject.Name.Comet] = ModHelper.RebindingHelper.RegisterRebindable("Center On Comet", "Center free cam on the Comet.", Key.Digit2, GamepadBinding.None, false);
+		CenterOnPlanetBindTypes[AstroObject.Name.CaveTwin] = ModHelper.RebindingHelper.RegisterRebindable("Center On Cave Twin", "Center free cam on the Cave Twin.", Key.Digit3, GamepadBinding.None, false);
+		CenterOnPlanetBindTypes[AstroObject.Name.TowerTwin] = ModHelper.RebindingHelper.RegisterRebindable("Center On Tower Twin", "Center free cam on the Tower Twin.", Key.Digit4, GamepadBinding.None, false);
+		CenterOnPlanetBindTypes[AstroObject.Name.TimberHearth] = ModHelper.RebindingHelper.RegisterRebindable("Center On Timber Hearth", "Center free cam on Timber Hearth.", Key.Digit5, GamepadBinding.None, false);
+		CenterOnPlanetBindTypes[AstroObject.Name.BrittleHollow] = ModHelper.RebindingHelper.RegisterRebindable("Center On Brittle Hollow", "Center free cam on Brittle Hollow.", Key.Digit6, GamepadBinding.None, false);
+		CenterOnPlanetBindTypes[AstroObject.Name.GiantsDeep] = ModHelper.RebindingHelper.RegisterRebindable("Center On Giant's Deep", "Center free cam on Giant's Deep.", Key.Digit7, GamepadBinding.None, false);
+		CenterOnPlanetBindTypes[AstroObject.Name.DarkBramble] = ModHelper.RebindingHelper.RegisterRebindable("Center On Dark Bramble", "Center free cam on Dark Bramble.", Key.Digit8, GamepadBinding.None, false);
+		CenterOnPlanetBindTypes[AstroObject.Name.RingWorld] = ModHelper.RebindingHelper.RegisterRebindable("Center On Ring World", "Center free cam on Ring World.", Key.Digit9, GamepadBinding.None, false);
+		
+		
 		GlobalMessenger<OWCamera>.AddListener("SwitchActiveCamera", OnSwitchActiveCamera);
 
 		SceneManager.sceneLoaded += OnSceneLoaded;
@@ -234,5 +382,34 @@ class MainClass : ModBehaviour
 	public override object GetApi()
 	{
 		return new FreeCamAPI();
+	}
+
+
+	public static bool TryGetSharedAxisID(InputAction first, InputAction second, bool gamepad, out AxisIdentifier axis)
+	{
+		axis = AxisIdentifier.NONE;
+		UnityEngine.InputSystem.InputBinding bindingMask = (gamepad ? InputActionUtil.GamepadBindingMask : InputActionUtil.DesktopBindingMask);
+		int bindingIndex = first.GetBindingIndex(bindingMask);
+		int bindingIndex2 = second.GetBindingIndex(bindingMask);
+		if (bindingIndex == -1 || bindingIndex2 == -1)
+		{
+			return false;
+		}
+		UnityEngine.InputSystem.InputBinding inputBinding = first.bindings[bindingIndex];
+		UnityEngine.InputSystem.InputBinding inputBinding2 = second.bindings[bindingIndex2];
+		if (inputBinding.effectivePath == inputBinding2.effectivePath)
+		{
+			string text;
+			string path;
+			inputBinding.ToDisplayString(out text, out path, UnityEngine.InputSystem.InputBinding.DisplayStringOptions.DontUseShortDisplayNames, null);
+			return InputTransitionUtil.TryGetAxisIdentifier(path, out axis);
+		}
+		InputControl inputControl = InputSystem.FindControl(inputBinding.effectivePath) as AxisControl;
+		InputControl inputControl2 = InputSystem.FindControl(inputBinding2.effectivePath) as AxisControl;
+		if (inputControl == null || inputControl2 == null)
+		{
+			return gamepad && InputTransitionUtil.TryGetAxisIdentifier(inputBinding.effectivePath, inputBinding2.effectivePath, out axis);
+		}
+		return !(inputControl is DiscreteButtonControl) && !(inputControl2 is DiscreteButtonControl) && inputControl.parent != null && inputControl2.parent != null && inputControl.parent == inputControl2.parent && (InputTransitionUtil.TryGetAxisIdentifier(inputBinding.effectivePath, inputBinding2.effectivePath, out axis) || InputTransitionUtil.TryGetAxisIdentifier(inputControl.parent.name, out axis));
 	}
 }

@@ -5,6 +5,6 @@
   "name": "FreeCam",
   "uniqueName": "misternebula.FreeCam",
   "version": "2.10.0",
-  "owmlVersion": "2.13.0",
+  "owmlVersion": "2.16.2",
   "dependencies": [ "xen.CommonCameraUtility", "JohnCorby.VanillaFix" ]
 }
