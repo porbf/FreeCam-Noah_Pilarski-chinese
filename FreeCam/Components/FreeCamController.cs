@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OWML.Utils;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -92,13 +93,12 @@ public class FreeCamController : MonoBehaviour
                 ParentToPlayer(OWInput.IsPressed(MainClass.TeleportBind));
             }
 
-            foreach (var planet in Enum.GetValues(typeof(AstroObject.Name)))
+            foreach (var planet in MainClass.CenterOnPlanetBindTypes.Keys)
             {
-                var p = (AstroObject.Name)planet;
-                var cmd = MainClass.GetCenterOnPlanetBind(p);
+                var cmd = MainClass.GetCenterOnPlanetBind(planet);
                 if (cmd != null && OWInput.IsNewlyPressed(cmd))
                 {
-                    ParentToAstroObject(Locator.GetAstroObject(p), OWInput.IsPressed(MainClass.TeleportBind));
+                    ParentToAstroObject(Locator.GetAstroObject(planet), OWInput.IsPressed(MainClass.TeleportBind));
                 }
             }
         }

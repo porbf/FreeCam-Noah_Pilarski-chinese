@@ -59,7 +59,11 @@ class MainClass : ModBehaviour
 
 	public static IInputCommands GetCenterOnPlanetBind(AstroObject.Name name)
 	{
-		return InputLibrary.GetInputCommand(CenterOnPlanetBindTypes[name]);
+		if (CenterOnPlanetBindTypes.TryGetValue(name, out var bindType))
+		{
+			return InputLibrary.GetInputCommand(bindType);
+		}
+		return null;
 	}
 
 	private InputMode _storedMode;
@@ -193,14 +197,14 @@ class MainClass : ModBehaviour
 
 		// Center on planets
 		CenterOnPlanetBindTypes[AstroObject.Name.Sun] = ModHelper.RebindingHelper.RegisterRebindable("Center On Sun", "Center free cam on the Sun.", Key.Digit1, GamepadBinding.None, false);
-		CenterOnPlanetBindTypes[AstroObject.Name.Comet] = ModHelper.RebindingHelper.RegisterRebindable("Center On Comet", "Center free cam on the Comet.", Key.Digit2, GamepadBinding.None, false);
-		CenterOnPlanetBindTypes[AstroObject.Name.CaveTwin] = ModHelper.RebindingHelper.RegisterRebindable("Center On Cave Twin", "Center free cam on the Cave Twin.", Key.Digit3, GamepadBinding.None, false);
-		CenterOnPlanetBindTypes[AstroObject.Name.TowerTwin] = ModHelper.RebindingHelper.RegisterRebindable("Center On Tower Twin", "Center free cam on the Tower Twin.", Key.Digit4, GamepadBinding.None, false);
+		CenterOnPlanetBindTypes[AstroObject.Name.Comet] = ModHelper.RebindingHelper.RegisterRebindable("Center On Interloper", "Center free cam on the Interloper.", Key.Digit2, GamepadBinding.None, false);
+		CenterOnPlanetBindTypes[AstroObject.Name.CaveTwin] = ModHelper.RebindingHelper.RegisterRebindable("Center On Ember Twin", "Center free cam on Ember Twin.", Key.Digit3, GamepadBinding.None, false);
+		CenterOnPlanetBindTypes[AstroObject.Name.TowerTwin] = ModHelper.RebindingHelper.RegisterRebindable("Center On Ash Twin", "Center free cam on Ash Twin.", Key.Digit4, GamepadBinding.None, false);
 		CenterOnPlanetBindTypes[AstroObject.Name.TimberHearth] = ModHelper.RebindingHelper.RegisterRebindable("Center On Timber Hearth", "Center free cam on Timber Hearth.", Key.Digit5, GamepadBinding.None, false);
 		CenterOnPlanetBindTypes[AstroObject.Name.BrittleHollow] = ModHelper.RebindingHelper.RegisterRebindable("Center On Brittle Hollow", "Center free cam on Brittle Hollow.", Key.Digit6, GamepadBinding.None, false);
 		CenterOnPlanetBindTypes[AstroObject.Name.GiantsDeep] = ModHelper.RebindingHelper.RegisterRebindable("Center On Giant's Deep", "Center free cam on Giant's Deep.", Key.Digit7, GamepadBinding.None, false);
 		CenterOnPlanetBindTypes[AstroObject.Name.DarkBramble] = ModHelper.RebindingHelper.RegisterRebindable("Center On Dark Bramble", "Center free cam on Dark Bramble.", Key.Digit8, GamepadBinding.None, false);
-		CenterOnPlanetBindTypes[AstroObject.Name.RingWorld] = ModHelper.RebindingHelper.RegisterRebindable("Center On Ring World", "Center free cam on Ring World.", Key.Digit9, GamepadBinding.None, false);
+		CenterOnPlanetBindTypes[AstroObject.Name.RingWorld] = ModHelper.RebindingHelper.RegisterRebindable("Center On Stranger", "Center free cam on Stranger.", Key.Digit9, GamepadBinding.None, false);
 		
 		
 		GlobalMessenger<OWCamera>.AddListener("SwitchActiveCamera", OnSwitchActiveCamera);

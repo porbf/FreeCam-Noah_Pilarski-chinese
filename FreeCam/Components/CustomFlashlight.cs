@@ -55,10 +55,10 @@ public class CustomFlashlight : MonoBehaviour
         var rate = OWInput.IsPressed(MainClass.FlashlightSpeedBind) ? _fastRangeAdjust : _slowRangeAdjust;
 
         var rangeValue = OWInput.GetValue(MainClass.FlashlightRangeBind);
-        if (rangeValue != 0)
-        {
-            MainClass.Write($"Range bind: {rangeValue}");
-        }
+        //if (rangeValue != 0)
+        //{
+        //    MainClass.Write($"Range bind: {rangeValue}");
+        //}
 
         _range = Mathf.Clamp(_range + (rangeValue * rate) * Time.deltaTime, _minRange, _maxRange);
         _light.range = _range;

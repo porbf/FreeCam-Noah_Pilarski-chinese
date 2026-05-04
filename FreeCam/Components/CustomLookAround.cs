@@ -35,10 +35,10 @@ public class CustomLookAround : MonoBehaviour
         if (OWTime.IsPaused() || !MainClass.InFreeCam) return;
 
         var scrollValue = OWInput.GetValue(MainClass.ChangeSpeedBind);
-        if (scrollValue != 0)
-        {
-            MainClass.Write($"Scroll bind: {scrollValue}");
-        }
+        //if (scrollValue != 0)
+        //{
+        //    MainClass.Write($"Scroll bind: {scrollValue}");
+        //}
         var scrollInOut = Math.Max(-1f, Math.Min(1f, scrollValue));
         _moveSpeed = (float)Math.Pow(Math.E, Math.Log(_moveSpeed) + scrollInOut * 0.1f);
 
