@@ -205,6 +205,13 @@ class MainClass : ModBehaviour
 		CenterOnPlanetBindTypes[AstroObject.Name.GiantsDeep] = ModHelper.RebindingHelper.RegisterRebindable("Center On Giant's Deep", "Center free cam on Giant's Deep.", Key.Digit7, GamepadBinding.None, false);
 		CenterOnPlanetBindTypes[AstroObject.Name.DarkBramble] = ModHelper.RebindingHelper.RegisterRebindable("Center On Dark Bramble", "Center free cam on Dark Bramble.", Key.Digit8, GamepadBinding.None, false);
 		CenterOnPlanetBindTypes[AstroObject.Name.RingWorld] = ModHelper.RebindingHelper.RegisterRebindable("Center On Stranger", "Center free cam on Stranger.", Key.Digit9, GamepadBinding.None, false);
+		CenterOnPlanetBindTypes[AstroObject.Name.WhiteHole] = ModHelper.RebindingHelper.RegisterRebindable("Center On White Hole", "Center free cam on White Hole.", Key.F1, GamepadBinding.None, false);
+		CenterOnPlanetBindTypes[AstroObject.Name.QuantumMoon] = ModHelper.RebindingHelper.RegisterRebindable("Center On Quantum Moon", "Center free cam on Quantum Moon.", Key.F2, GamepadBinding.None, false);
+		CenterOnPlanetBindTypes[AstroObject.Name.ProbeCannon] = ModHelper.RebindingHelper.RegisterRebindable("Center On Probe Cannon", "Center free cam on Probe Cannon.", Key.F3, GamepadBinding.None, false);
+		CenterOnPlanetBindTypes[AstroObject.Name.TimberMoon] = ModHelper.RebindingHelper.RegisterRebindable("Center On Attlerock", "Center free cam on Attlerock.", Key.F4, GamepadBinding.None, false);
+		CenterOnPlanetBindTypes[AstroObject.Name.VolcanicMoon] = ModHelper.RebindingHelper.RegisterRebindable("Center On Hollow's Lantern", "Center free cam on Hollow's Lantern.", Key.F5, GamepadBinding.None, false);
+		CenterOnPlanetBindTypes[AstroObject.Name.SunStation] = ModHelper.RebindingHelper.RegisterRebindable("Center On Sun Station", "Center free cam on Sun Station.", Key.F6, GamepadBinding.None, false);
+		CenterOnPlanetBindTypes[AstroObject.Name.MapSatellite] = ModHelper.RebindingHelper.RegisterRebindable("Center On Map Satellite", "Center free cam on Map Satellite.", Key.F7, GamepadBinding.None, false);
 		
 		
 		GlobalMessenger<OWCamera>.AddListener("SwitchActiveCamera", OnSwitchActiveCamera);
