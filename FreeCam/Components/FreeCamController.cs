@@ -63,7 +63,7 @@ public class FreeCamController : MonoBehaviour
             MainClass.ToggleFreeCam();
         }
 
-        if (!MainClass.InFreeCam) return;
+        //不，它不在这:(
 
         if (OWInput.IsNewlyPressed(MainClass.Time0Bind))
         {
@@ -82,6 +82,9 @@ public class FreeCamController : MonoBehaviour
             Time.timeScale = 1f;
             Locator.GetMenuAudioController().PlayButtonFocus();
         }
+
+        if (!MainClass.InFreeCam) return;//它来到了这里
+
 
         HoldingTeleport = false;
         if (OWInput.IsPressed(MainClass.TeleportBind) || OWInput.IsPressed(MainClass.ReparentBind))

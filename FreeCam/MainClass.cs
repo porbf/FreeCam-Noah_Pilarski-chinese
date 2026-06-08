@@ -281,7 +281,7 @@ class MainClass : ModBehaviour
 				_storedMode = InputMode.Character;
 			}
 			OWInput.ChangeInputMode(_storedMode);
-			ResetTimeScale();
+			//ResetTimeScale();  我不想要这段代码
 			ShowHUD();
 			try
 			{
