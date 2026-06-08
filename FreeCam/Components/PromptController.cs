@@ -24,12 +24,12 @@ public class PromptController : MonoBehaviour
         _customLookAround = GetComponent<CustomLookAround>();
 
         // Top Left
-        _togglePrompt = AddPrompt("Toggle FreeCam", PromptPosition.UpperLeft, MainClass.ToggleFreeCamBind);
-        _guiPrompt = AddPrompt("Hide HUD", PromptPosition.UpperLeft, MainClass.ToggleHUDBind);
+        _togglePrompt = AddPrompt("切换自由视角", PromptPosition.UpperLeft, MainClass.ToggleFreeCamBind);
+        _guiPrompt = AddPrompt("隐藏HUD", PromptPosition.UpperLeft, MainClass.ToggleHUDBind);
 
-        _resetPrompt = AddPrompt("Reset", PromptPosition.UpperLeft, MainClass.CameraResetBind);
-        _scrollPrompt = AddPrompt("Change speed", PromptPosition.UpperLeft, MainClass.ChangeSpeedBind);
-        _speedPrompt = AddPrompt("Speed: " + _customLookAround.MoveSpeed + " m/s", PromptPosition.UpperLeft);
+        _resetPrompt = AddPrompt("重置", PromptPosition.UpperLeft, MainClass.CameraResetBind);
+        _scrollPrompt = AddPrompt("调整速度", PromptPosition.UpperLeft, MainClass.ChangeSpeedBind);
+        _speedPrompt = AddPrompt("速度: " + _customLookAround.MoveSpeed + " m/s", PromptPosition.UpperLeft);
 
         _rotatePrompt = AddPrompt(
             "<CMD1>" + UITextLibrary.GetString(UITextType.HoldPrompt) + "  +<CMD2>  " + UITextLibrary.GetString(UITextType.RollPrompt), PromptPosition.UpperLeft,
@@ -42,19 +42,19 @@ public class PromptController : MonoBehaviour
 
         // Flashlight
         _flashlightPrompt = AddPrompt(UITextLibrary.GetString(UITextType.PressPrompt) + " " + UITextLibrary.GetString(UITextType.FlashlightPrompt), PromptPosition.UpperLeft, InputLibrary.flashlight);
-        _flashlightRangePrompt = AddPrompt("Flashlight range", PromptPosition.UpperLeft, MainClass.FlashlightRangeBind);
-        _flashlightSpeedPrompt = AddPrompt(UITextLibrary.GetString(UITextType.HoldPrompt) + " Adjust range faster", PromptPosition.UpperLeft, MainClass.FlashlightSpeedBind);
+        _flashlightRangePrompt = AddPrompt("手电筒范围", PromptPosition.UpperLeft, MainClass.FlashlightRangeBind);
+        _flashlightSpeedPrompt = AddPrompt(UITextLibrary.GetString(UITextType.HoldPrompt) + " 快速调整范围", PromptPosition.UpperLeft, MainClass.FlashlightSpeedBind);
 
         // Time
         _timePrompts = [
-            AddPrompt("0% game speed", PromptPosition.LowerLeft, MainClass.Time0Bind),
-            AddPrompt("50% game speed", PromptPosition.LowerLeft, MainClass.Time50Bind),
-            AddPrompt("100% game speed", PromptPosition.LowerLeft, MainClass.Time100Bind)
+            AddPrompt("0% 游戏速度", PromptPosition.LowerLeft, MainClass.Time0Bind),
+            AddPrompt("50% 游戏速度", PromptPosition.LowerLeft, MainClass.Time50Bind),
+            AddPrompt("100% 游戏速度", PromptPosition.LowerLeft, MainClass.Time100Bind)
         ];
 
         // Top Right
-        _teleportOptions = AddPrompt("Teleport options   <CMD>" + UITextLibrary.GetString(UITextType.HoldPrompt), PromptPosition.UpperRight, MainClass.TeleportBind);
-        _reparentOptions = AddPrompt("Parent options   <CMD>" + UITextLibrary.GetString(UITextType.HoldPrompt), PromptPosition.UpperRight, MainClass.ReparentBind);
+        _teleportOptions = AddPrompt("传送选项   <CMD>" + UITextLibrary.GetString(UITextType.HoldPrompt), PromptPosition.UpperRight, MainClass.TeleportBind);
+        _reparentOptions = AddPrompt("聚焦选项   <CMD>" + UITextLibrary.GetString(UITextType.HoldPrompt), PromptPosition.UpperRight, MainClass.ReparentBind);
         _centerPlayerPrompt = AddPrompt("Player", PromptPosition.UpperRight, MainClass.CenterOnPlayerBind);
 
         _planetPrompts = [];
@@ -82,7 +82,7 @@ public class PromptController : MonoBehaviour
         string moveSpeedString;
         if (moveSpeed < 0.01f || moveSpeed > 100f) { moveSpeedString = moveSpeed.ToString("0.000e0"); }
         else { moveSpeedString = moveSpeed.ToString("0.000"); }
-        _speedPrompt.SetText("Speed: " + moveSpeedString + " m/s");
+        _speedPrompt.SetText("速度: " + moveSpeedString + " m/s");
 
         _rotatePrompt.SetVisibility(otherVisible);
         _lookPrompt.SetVisibility(otherVisible);

@@ -91,22 +91,22 @@ class MainClass : ModBehaviour
 		{
 			if (_commonCameraAPI == null)
 			{
-				WriteError($"CommonCameraAPI was not found. FreeCam will not run.");
+				WriteError($"未找到 CommonCameraAPI。FreeCam 将无法运行");
 				enabled = false;
 			}
 		}
 
 		// Toggles
 		ToggleFreeCamBindType = ModHelper.RebindingHelper.RegisterRebindable(
-			"Toggle Free Cam",
-			"Key to toggle free cam on/off.",
+            "切换自由相机",
+            "用于开启/关闭自由相机的按键",
 			Key.Semicolon,
 			GamepadBinding.None,
 			false
 		);
 		ToggleHUDBindType = ModHelper.RebindingHelper.RegisterRebindable(
-			"Toggle HUD",
-			"Toggle the helmet HUD while in free cam.",
+            "切换 HUD",
+            "在自由相机模式下切换头盔 HUD 的显示",
 			Key.Quote,
 			GamepadBinding.None,
 			false
@@ -114,8 +114,8 @@ class MainClass : ModBehaviour
 
 		// Camera
 		ChangeSpeedBindType = ModHelper.RebindingHelper.RegisterRebindable(
-			"Move Speed Adjust",
-			"Axis to adjust move speed.",
+            "调整移动速度",
+            "用于增加/减少移动速度的轴。",
 			MouseBinding.ScrollUp,
 			GamepadBinding.DPadUp,
 			MouseBinding.ScrollDown,
@@ -123,8 +123,8 @@ class MainClass : ModBehaviour
 			true
 		);
 		CameraResetBindType = ModHelper.RebindingHelper.RegisterRebindable(
-			"Camera Reset",
-			"Reset camera to default position.",
+            "重置相机",
+            "将相机重置到默认位置",
 			Key.DownArrow,
 			GamepadBinding.None,
 			false
@@ -132,7 +132,7 @@ class MainClass : ModBehaviour
 
 		// Flashlight
 		FlashlightRangeBindType = ModHelper.RebindingHelper.RegisterRebindable(
-			"Flashlight Range",
+            "手电筒范围",
 			"",
 			Key.LeftBracket,
 			GamepadBinding.DPadLeft,
@@ -141,8 +141,8 @@ class MainClass : ModBehaviour
 			true
 		);
 		FlashlightSpeedBindType = ModHelper.RebindingHelper.RegisterRebindable(
-			"Flashlight Fast Adjust",
-			"Hold to adjust flashlight range faster.",
+            "手电筒快速调节",
+            "按住时以更快的速度调节手电筒范围",
 			Key.LeftShift,
 			GamepadBinding.None,
 			false
@@ -151,21 +151,21 @@ class MainClass : ModBehaviour
 		// Time shortcuts
 		Time0BindType = ModHelper.RebindingHelper.RegisterRebindable(
 			"Time 0%",
-			"Set game time scale to 0%.",
+            "将游戏时间流速设为 0%",
 			Key.Comma,
 			GamepadBinding.None,
 			false
 		);
 		Time50BindType = ModHelper.RebindingHelper.RegisterRebindable(
 			"Time 50%",
-			"Set game time scale to 50%.",
+            "将游戏时间流速设为 50%",
 			Key.Period,
 			GamepadBinding.None,
 			false
 		);
 		Time100BindType = ModHelper.RebindingHelper.RegisterRebindable(
 			"Time 100%",
-			"Set game time scale to 100%.",
+			"将游戏时间流速设为 100%",
 			Key.Slash,
 			GamepadBinding.None,
 			false
@@ -173,48 +173,48 @@ class MainClass : ModBehaviour
 
 		// Teleport / Reparent hold keys
 		TeleportBindType = ModHelper.RebindingHelper.RegisterRebindable(
-			"Teleport Hold",
-			"Hold to teleport or parent when selecting targets.",
+            "传送(长按)",
+            "长按时对选中的目标执行传送或设为父级",
 			Key.T,
 			GamepadBinding.None,
 			false
 		);
 		ReparentBindType = ModHelper.RebindingHelper.RegisterRebindable(
-			"Reparent Hold",
-			"Hold to reparent when selecting targets.",
+            "重新设置父级(长按)",
+			"长按时对选中的目标执行重新设置父级操作",
 			Key.Y,
 			GamepadBinding.None,
 			false
 		);
 
 		CenterOnPlayerBindType = ModHelper.RebindingHelper.RegisterRebindable(
-			"Center On Player",
-			"Center free cam on the player.",
+            "以玩家为中心",
+            "将自由相机对准玩家位置.",
 			Key.Digit0,
 			GamepadBinding.None,
 			false
 		);
 
-		// Center on planets
-		CenterOnPlanetBindTypes[AstroObject.Name.Sun] = ModHelper.RebindingHelper.RegisterRebindable("Center On Sun", "Center free cam on the Sun.", Key.Digit1, GamepadBinding.None, false);
-		CenterOnPlanetBindTypes[AstroObject.Name.Comet] = ModHelper.RebindingHelper.RegisterRebindable("Center On Interloper", "Center free cam on the Interloper.", Key.Digit2, GamepadBinding.None, false);
-		CenterOnPlanetBindTypes[AstroObject.Name.CaveTwin] = ModHelper.RebindingHelper.RegisterRebindable("Center On Ember Twin", "Center free cam on Ember Twin.", Key.Digit3, GamepadBinding.None, false);
-		CenterOnPlanetBindTypes[AstroObject.Name.TowerTwin] = ModHelper.RebindingHelper.RegisterRebindable("Center On Ash Twin", "Center free cam on Ash Twin.", Key.Digit4, GamepadBinding.None, false);
-		CenterOnPlanetBindTypes[AstroObject.Name.TimberHearth] = ModHelper.RebindingHelper.RegisterRebindable("Center On Timber Hearth", "Center free cam on Timber Hearth.", Key.Digit5, GamepadBinding.None, false);
-		CenterOnPlanetBindTypes[AstroObject.Name.BrittleHollow] = ModHelper.RebindingHelper.RegisterRebindable("Center On Brittle Hollow", "Center free cam on Brittle Hollow.", Key.Digit6, GamepadBinding.None, false);
-		CenterOnPlanetBindTypes[AstroObject.Name.GiantsDeep] = ModHelper.RebindingHelper.RegisterRebindable("Center On Giant's Deep", "Center free cam on Giant's Deep.", Key.Digit7, GamepadBinding.None, false);
-		CenterOnPlanetBindTypes[AstroObject.Name.DarkBramble] = ModHelper.RebindingHelper.RegisterRebindable("Center On Dark Bramble", "Center free cam on Dark Bramble.", Key.Digit8, GamepadBinding.None, false);
-		CenterOnPlanetBindTypes[AstroObject.Name.RingWorld] = ModHelper.RebindingHelper.RegisterRebindable("Center On Stranger", "Center free cam on Stranger.", Key.Digit9, GamepadBinding.None, false);
-		CenterOnPlanetBindTypes[AstroObject.Name.WhiteHole] = ModHelper.RebindingHelper.RegisterRebindable("Center On White Hole", "Center free cam on White Hole.", Key.F1, GamepadBinding.None, false);
-		CenterOnPlanetBindTypes[AstroObject.Name.QuantumMoon] = ModHelper.RebindingHelper.RegisterRebindable("Center On Quantum Moon", "Center free cam on Quantum Moon.", Key.F2, GamepadBinding.None, false);
-		CenterOnPlanetBindTypes[AstroObject.Name.ProbeCannon] = ModHelper.RebindingHelper.RegisterRebindable("Center On Probe Cannon", "Center free cam on Probe Cannon.", Key.F3, GamepadBinding.None, false);
-		CenterOnPlanetBindTypes[AstroObject.Name.TimberMoon] = ModHelper.RebindingHelper.RegisterRebindable("Center On Attlerock", "Center free cam on Attlerock.", Key.F4, GamepadBinding.None, false);
-		CenterOnPlanetBindTypes[AstroObject.Name.VolcanicMoon] = ModHelper.RebindingHelper.RegisterRebindable("Center On Hollow's Lantern", "Center free cam on Hollow's Lantern.", Key.F5, GamepadBinding.None, false);
-		CenterOnPlanetBindTypes[AstroObject.Name.SunStation] = ModHelper.RebindingHelper.RegisterRebindable("Center On Sun Station", "Center free cam on Sun Station.", Key.F6, GamepadBinding.None, false);
-		CenterOnPlanetBindTypes[AstroObject.Name.MapSatellite] = ModHelper.RebindingHelper.RegisterRebindable("Center On Map Satellite", "Center free cam on Map Satellite.", Key.F7, GamepadBinding.None, false);
-		
-		
-		GlobalMessenger<OWCamera>.AddListener("SwitchActiveCamera", OnSwitchActiveCamera);
+        // Center on planets
+        CenterOnPlanetBindTypes[AstroObject.Name.Sun] = ModHelper.RebindingHelper.RegisterRebindable("以太阳为中心", "将自由相机对准太阳。", Key.Digit1, GamepadBinding.None, false);
+        CenterOnPlanetBindTypes[AstroObject.Name.Comet] = ModHelper.RebindingHelper.RegisterRebindable("以闯入者为中心", "将自由相机对准闯入者。", Key.Digit2, GamepadBinding.None, false);
+        CenterOnPlanetBindTypes[AstroObject.Name.CaveTwin] = ModHelper.RebindingHelper.RegisterRebindable("以余烬双星为中心", "将自由相机对准余烬双星。", Key.Digit3, GamepadBinding.None, false);
+        CenterOnPlanetBindTypes[AstroObject.Name.TowerTwin] = ModHelper.RebindingHelper.RegisterRebindable("以灰烬双星为中心", "将自由相机对准灰烬双星。", Key.Digit4, GamepadBinding.None, false);
+        CenterOnPlanetBindTypes[AstroObject.Name.TimberHearth] = ModHelper.RebindingHelper.RegisterRebindable("以木炉星为中心", "将自由相机对准木炉星。", Key.Digit5, GamepadBinding.None, false);
+        CenterOnPlanetBindTypes[AstroObject.Name.BrittleHollow] = ModHelper.RebindingHelper.RegisterRebindable("以碎空星为中心", "将自由相机对准碎空星。", Key.Digit6, GamepadBinding.None, false);
+        CenterOnPlanetBindTypes[AstroObject.Name.GiantsDeep] = ModHelper.RebindingHelper.RegisterRebindable("以深巨星为中心", "将自由相机对准深巨星。", Key.Digit7, GamepadBinding.None, false);
+        CenterOnPlanetBindTypes[AstroObject.Name.DarkBramble] = ModHelper.RebindingHelper.RegisterRebindable("以黑棘星为中心", "将自由相机对准黑棘星。", Key.Digit8, GamepadBinding.None, false);
+        CenterOnPlanetBindTypes[AstroObject.Name.RingWorld] = ModHelper.RebindingHelper.RegisterRebindable("以陌生人号为中心", "将自由相机对准陌生人号。", Key.Digit9, GamepadBinding.None, false);
+        CenterOnPlanetBindTypes[AstroObject.Name.WhiteHole] = ModHelper.RebindingHelper.RegisterRebindable("以白洞为中心", "将自由相机对准白洞。", Key.F1, GamepadBinding.None, false);
+        CenterOnPlanetBindTypes[AstroObject.Name.QuantumMoon] = ModHelper.RebindingHelper.RegisterRebindable("以量子卫星为中心", "将自由相机对准量子卫星。", Key.F2, GamepadBinding.None, false);
+        CenterOnPlanetBindTypes[AstroObject.Name.ProbeCannon] = ModHelper.RebindingHelper.RegisterRebindable("以探测炮为中心", "将自由相机对准探测炮。", Key.F3, GamepadBinding.None, false);
+        CenterOnPlanetBindTypes[AstroObject.Name.TimberMoon] = ModHelper.RebindingHelper.RegisterRebindable("以木炉卫星为中心", "将自由相机对准木炉卫星。", Key.F4, GamepadBinding.None, false);
+        CenterOnPlanetBindTypes[AstroObject.Name.VolcanicMoon] = ModHelper.RebindingHelper.RegisterRebindable("以空心灯为中心", "将自由相机对准空心灯。", Key.F5, GamepadBinding.None, false);
+        CenterOnPlanetBindTypes[AstroObject.Name.SunStation] = ModHelper.RebindingHelper.RegisterRebindable("以太阳站为中心", "将自由相机对准太阳站。", Key.F6, GamepadBinding.None, false);
+        CenterOnPlanetBindTypes[AstroObject.Name.MapSatellite] = ModHelper.RebindingHelper.RegisterRebindable("以地图卫星为中心", "将自由相机对准地图卫星。", Key.F7, GamepadBinding.None, false);
+
+
+        GlobalMessenger<OWCamera>.AddListener("SwitchActiveCamera", OnSwitchActiveCamera);
 
 		SceneManager.sceneLoaded += OnSceneLoaded;
 	}
@@ -246,7 +246,7 @@ class MainClass : ModBehaviour
 
 	private void OnSceneLoaded(Scene scene, LoadSceneMode _)
 	{
-		Write($"Loading scene {scene.name}");
+		Write($"正在加载场景： {scene.name}");
 
 		if (scene.name != "SolarSystem" && scene.name != "EyeOfTheUniverse") return;
 
@@ -289,7 +289,7 @@ class MainClass : ModBehaviour
 			}
 			catch (Exception e)
 			{
-				WriteError($"Error invoking OnFreeCamExited event: {e}");
+				WriteError($"调用 OnFreeCamExited 事件时出错: {e}");
 			}
 		}
 		else if (!InFreeCam && camera == _owCamera)
@@ -318,7 +318,7 @@ class MainClass : ModBehaviour
 	{
 		if (InFreeCam)
 		{
-			Write("Exiting free cam");
+			Write("退出自由视角");
 			_instance._commonCameraAPI.ExitCamera(_instance._owCamera);
 
 			// Only re-enable the helmet HUD if we aren't already hiding the GUI
@@ -329,7 +329,7 @@ class MainClass : ModBehaviour
 		}
 		else
 		{
-			Write("Entering free cam");
+			Write("进入自由视角");
 			_instance._commonCameraAPI.EnterCamera(_instance._owCamera);
 			_instance._hud.SetActive(false);
 		}
@@ -355,7 +355,7 @@ class MainClass : ModBehaviour
 	{
 		if (GUIMode.IsHiddenMode())
 		{
-			Write("Showing HUD");
+			Write("显示HUD");
 			GUIMode.SetRenderMode(GUIMode.RenderMode.FPS);
 
 			// Turning the HUD back on while in free cam also shows the helmet HUD, which we don't want
@@ -366,7 +366,7 @@ class MainClass : ModBehaviour
 		}
 		else
 		{
-			Write("Hiding HUD");
+			Write("隐藏HUD");
 			GUIMode.SetRenderMode(GUIMode.RenderMode.Hidden);
 		}
 	}

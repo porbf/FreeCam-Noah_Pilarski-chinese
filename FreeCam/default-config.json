@@ -1,59 +1,60 @@
 {
-  "$schema": "https://raw.githubusercontent.com/ow-mods/owml/master/schemas/config_schema.json",
-  "enabled": true,
-  "settings": {
-    "CameraSeparator": {
-      "type": "separator"
-    },
-    "CameraLabel": {
-      "type": "label",
-      "title": "Camera"
-    },
-    "FOV": {
-      "title": "FOV",
-      "type": "slider",
-      "min": 10,
-      "max": 170,
-      "value": 90,
-      "tooltip": "Field of view in degrees. Higher values widen the view, lower values zoom in."
-    },
-    "Near Clip Plane Distance": {
-      "title": "Near Clip Plane Distance",
-      "type": "number",
-      "value": 1,
-      "tooltip": "Minimum distance away from camera at which objects are rendered."
-    },
-    "Reset Parent": {
-      "title": "Reset Parent",
-      "type": "toggle",
-      "value": true,
-      "tooltip": "Whether the free cam will reparent itself to the player every time you toggle it on."
-    },
-    "PromptsSeparator": {
-      "type": "separator"
-    },
-    "PromptsLabel": {
-      "type": "label",
-      "title": "Button Prompts"
-    },
-    "Hide Prompts": {
-      "title": "Hide Button Prompts",
-      "type": "toggle",
-      "value": false,
-      "tooltip": "Hide all button prompts. (except toggle)"
-    },
-    "Hide Toggle Prompt": {
-      "title": "Hide Toggle Prompt",
-      "type": "toggle",
-      "value": false,
-      "tooltip": "Hide the toggle button prompt."
-    },
-    "ControlsSeparator": {
-      "type": "separator"
-    },
-    "ControlsLabel": {
-      "type": "label",
-      "title": "Controls"
+    "$schema": "https://raw.githubusercontent.com/ow-mods/owml/master/schemas/config_schema.json",
+    "enabled": true,
+    "settings": {
+        "CameraSeparator": {
+            "type": "separator"
+        },
+        "CameraLabel": {
+            "type": "label",
+            "title": "相机"
+        },
+        "FOV": {
+            "title": "FOV",
+            "type": "slider",
+            "min": 10,
+            "max": 170,
+            "value": 90,
+            "tooltip": "接近裁剪平面距离 视野范围（以度为单位）。数值越高，视野越宽；数值越低，视野越窄。"
+        },
+        "Near Clip Plane Distance": {
+            "title": "靠近剪切平面距离",
+            "type": "number",
+            "value": 1,
+            "tooltip": "物理渲染和相机的最小距离"
+        },
+        "Reset Parent": {
+            "title": "重置位置",
+            "type": "toggle",
+            "value": true,
+            "tooltip": "每次你开启自由视角时，它是否会自动重新关联到玩家。"
+        },
+        "PromptsSeparator": {
+            "type": "separator"
+        },
+        "PromptsLabel": {
+            "type": "label",
+            "title": "按钮提示"
+        },
+        "Hide Prompts": {
+            "title": "隐藏按钮提示",
+            "type": "toggle",
+            "value": false,
+            "tooltip": "隐藏所有按钮提示（除切换按钮外）"
+        },
+        "Hide Toggle Prompt": {
+            "title": "隐藏切换提示",
+            "type": "toggle",
+            "value": false,
+            "tooltip": "隐藏切换按钮提示."
+        },
+        "ControlsSeparator": {
+            "type": "separator"
+        },
+        "ControlsLabel": {
+            "type": "label",
+            "title": "控制文本"
+        }
     }
-  }
 }
+//原作者既不是用Tab换行，也不是用空格换行，还手写了全部内容，不难受吗

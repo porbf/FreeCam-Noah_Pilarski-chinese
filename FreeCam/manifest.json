@@ -1,9 +1,9 @@
 {
   "$schema": "https://raw.githubusercontent.com/amazingalek/owml/master/schemas/manifest_schema.json",
   "filename": "FreeCam.dll",
-  "author": "_nebula & xen",
+  "author": "_nebula & xen  bonesfrisk汉化",
   "name": "FreeCam",
-  "uniqueName": "misternebula.FreeCam",
+  "uniqueName": "bonesfrisk.FreeCam",
   "version": "2.10.0",
   "owmlVersion": "2.16.2",
   "dependencies": [ "xen.CommonCameraUtility", "JohnCorby.VanillaFix" ]
