@@ -1,12 +1,12 @@
 # FreeCam
 
-Allows you to freely move a camera around the solar system!
+让你可以自由地在太阳系中移动摄像机！
 
 ![image](https://user-images.githubusercontent.com/22628069/193596035-0068ccf0-3388-4096-81e1-8c43224f629d.png)
 
-## Controls
+## 控制
 
-Keyboard keys are shown in game with button prompts (can be hidden in the mod options). There are some alternative keys on the keypad.
+游戏中的键盘按键会以按钮提示显示（可在模组选项中隐藏）。键盘上还有一些替代按键。
 
 | **Keypad Key** | **Keyboard Key** | **Function** |
 |---|---|---|
